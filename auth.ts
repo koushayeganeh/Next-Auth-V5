@@ -6,6 +6,20 @@ import authConfig from "@/auth.config";
 import { getUserById } from "@/data/user";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
+  pages: {
+    // this signIn page is for redirecting the user after login error (such as trying to log in using a provider with an account utilizing an already existing email)
+    signIn: "/auth/login",
+    // this error page is for any other errors that may accure during the login process besides wrong credentials or using the same email etc.
+    error: "/auth/error",
+  },
+  events: {
+    async linkAccount({ user }) {
+      await db.user.update({
+        where: { id: user.id },
+        data: { emailVerified: new Date() },
+      });
+    },
+  },
   callbacks: {
     // async signIn({ user }) {
     //   if (!user.id) {
