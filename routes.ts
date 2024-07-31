@@ -16,11 +16,10 @@ export const authRoutes = ["/auth/login", "/auth/register", "/auth/error"];
 /**
  * The prefix for API authentication routes
  * Routes started with this prefix are used for API authentication purposes
- * @type {string}
+ * @type {string[]}
  */
 
-// export const apiAuthPrefix = "/api/auth";
-export const apiAuthPrefix = "/api";
+export const apiAuthPrefix = ["/api/auth", "/api/sendEmail"];
 
 /**
  * The default redirect path after logging in

@@ -20,7 +20,7 @@ export async function POST(req) {
       to,
       subject: "Email Verification",
       html: `<p>Please verify your email by clicking on the link below:</p>
-             <a href="https://yourdomain.com/verify?token=${token}">Click here to verify</a>`,
+             <a href="${process.env.NEXT_PUBLIC_BASE_URL}/auth/new-verification?token=${token}">Click here to verify</a>`,
     };
 
     const info = await transporter.sendMail(mailOptions);
