@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
-    const { to, token } = await req.json();
-    console.log("Received data:", { to, token });
+    const { to, subject, html } = await req.json();
+    console.log("Received data:", { to, subject, html });
 
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
@@ -19,9 +19,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const mailOptions = {
       from: process.env.SMTP_FROM,
       to,
-      subject: "Email Verification",
-      html: `<p>Please verify your email by clicking on the link below:</p>
-             <a href="${process.env.NEXT_PUBLIC_BASE_URL}/auth/new-verification?token=${token}">Click here to verify</a>`,
+      subject,
+      html,
     };
 
     const info = await transporter.sendMail(mailOptions);
