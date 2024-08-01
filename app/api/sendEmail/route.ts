@@ -1,13 +1,14 @@
 import nodemailer from "nodemailer";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req) {
+export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     const { to, token } = await req.json();
     console.log("Received data:", { to, token });
 
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT, 10),
+      port: parseInt(process.env.SMTP_PORT || "587", 10),
       secure: process.env.SMTP_SECURE === "true",
       auth: {
         user: process.env.SMTP_USER,
@@ -25,13 +26,13 @@ export async function POST(req) {
 
     const info = await transporter.sendMail(mailOptions);
     console.log("Message sent: %s", info.messageId);
-    return new Response(
+    return new NextResponse(
       JSON.stringify({ message: "Email sent successfully" }),
       { status: 200 }
     );
   } catch (error) {
     console.error("Error in API route:", error);
-    return new Response(JSON.stringify({ error: "Error sending email" }), {
+    return new NextResponse(JSON.stringify({ error: "Error sending email" }), {
       status: 500,
     });
   }

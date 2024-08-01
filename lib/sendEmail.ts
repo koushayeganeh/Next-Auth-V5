@@ -1,4 +1,7 @@
-export async function sendVerificationEmail(to, token) {
+export async function sendVerificationEmail(
+  to: string,
+  token: string
+): Promise<{ message: string }> {
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/sendEmail`;
   console.log("Fetching URL:", url);
 
