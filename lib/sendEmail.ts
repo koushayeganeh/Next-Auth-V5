@@ -48,7 +48,7 @@ export async function sendPasswordResetEmail(
 ): Promise<{ message: string }> {
   const subject = "Password Reset";
   const html = `<p>Please reset your password by clicking on the link below:</p>
-                <a href="${process.env.NEXT_PUBLIC_BASE_URL}/auth/reset-password?token=${token}">Click here to reset your password</a>`;
+                <a href="${process.env.NEXT_PUBLIC_BASE_URL}/auth/new-password?token=${token}">Click here to reset your password</a>`;
 
   return sendEmail(to, subject, html);
 }
