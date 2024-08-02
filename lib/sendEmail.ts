@@ -52,3 +52,13 @@ export async function sendPasswordResetEmail(
 
   return sendEmail(to, subject, html);
 }
+
+export async function sendTwoFactorTokenEmail(
+  to: string,
+  token: string
+): Promise<{ message: string }> {
+  const subject = "2FA Code";
+  const html = `<p>Your 2FA code: ${token}</p>`;
+
+  return sendEmail(to, subject, html);
+}
