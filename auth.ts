@@ -22,19 +22,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     },
   },
   callbacks: {
-    // async signIn({ user }) {
-    //   if (!user.id) {
-    //     return false; // or handle the error appropriately
-    //   }
-    //   const existingUser = await getUserById(user.id);
-
-    //   if (!existingUser || !existingUser.emailVerified) {
-    //     return false;
-    //   }
-
-    //   return true;
-    // },
-
     async signIn({ user, account }) {
       if (!user.id) {
         return false; // or handle the error appropriately

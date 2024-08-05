@@ -33,3 +33,4 @@ export const apiAuthPrefix = ["/api/auth", "/api/sendEmail"];
  */
 
 export const DEFAULT_LOGIN_REDIRECT = "/settings";
+export const DEFAULT_LOGOUT_REDIRECT = "/auth/login";
